@@ -1,4 +1,4 @@
-# Recptcha Guest
+# Recaptcha Guest
 Plugin to allow the use of the [aberkie/craft-recaptcha](https://github.com/aberkie/craft-recaptcha) plugin in [Guest Entries](https://github.com/pixelandtonic/GuestEntries) submissions.
 
 ## Pre-requisites
