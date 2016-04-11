@@ -22,7 +22,7 @@
          */
         public function getVersion()
         {
-            return '0.0.1';
+            return '0.0.2';
         }
 
         /**
@@ -30,7 +30,7 @@
          */
         public function getSchemaVersion()
         {
-            return '0.0.1';
+            return '0.0.2';
         }
 
         /**
@@ -86,18 +86,20 @@
             craft()->on('guestEntries.beforeSave', function (GuestEntriesEvent $event)
             {
                 $entryModel = $event->params['entry'];
+                $recaptchaPlugin = craft()->plugins->getPlugin('recaptcha', false);
 
-                $captcha = craft()->request->getPost('g-recaptcha-response');
-                $verified = craft()->recaptcha_verify->verify($captcha);
-
-                if (!$verified)
+                if ( $recaptchaPlugin->isInstalled && $recaptchaPlugin->isEnabled)
                 {
-                    //Uh oh...its a robot. Don't process this form!
-                    $entryModel->addError('recaptcha', "There was a problem with the captcha.");
-                    $event->isValid = false;
+                    $captcha = craft()->request->getPost('g-recaptcha-response');
+                    $verified = craft()->recaptcha_verify->verify($captcha);
+
+                    if (!$verified)
+                    {
+                        //Uh oh...its a robot. Don't process this form!
+                        $entryModel->addError('recaptcha', "There was a problem with the captcha.");
+                        $event->isValid = false;
+                    }
                 }
-
-
             });
         }
     }
