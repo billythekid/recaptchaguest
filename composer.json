@@ -1,0 +1,7 @@
+{
+  "name": "btk/recaptchaguest",
+  "description": "CraftCMS plugin to tie together guest entries and recaptcha plugins.",
+  "require": {
+    "php": ">=5.6"
+  }
+}
