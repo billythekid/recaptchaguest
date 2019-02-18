@@ -1,7 +1,40 @@
 {
-  "name": "btk/recaptchaguest",
-  "description": "CraftCMS plugin to tie together guest entries and recaptcha plugins.",
-  "require": {
-    "php": ">=5.6"
-  }
+    "name": "billythekid/recaptchaguest",
+    "description": "Integrate matt-west/craft-recaptcha with craftcms/guest-entries",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "recaptchaguest"
+    ],
+    "support": {
+        "docs": "https://github.com/billythekid/recaptchaguest/blob/master/README.md",
+        "issues": "https://github.com/billythekid/recaptchaguest/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Billy Fagan",
+            "homepage": "https://billyfagan.co.uk"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "billythekid\\recaptchaguest\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "recaptchaguest",
+        "handle": "recaptchaguest",
+        "hasCpSettings": false,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/billythekid/recaptchaguest/master/CHANGELOG.md",
+        "class": "billythekid\\recaptchaguest\\Recaptchaguest"
+    }
 }
