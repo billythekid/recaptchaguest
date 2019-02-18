@@ -14,6 +14,7 @@ use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\guestentries\controllers\SaveController;
 use craft\guestentries\events\SaveEvent;
+use \craft\guestentries\Plugin as GuestEntryPlugin;
 
 use mattwest\craftrecaptcha\CraftRecaptcha;
 use yii\base\Event;
