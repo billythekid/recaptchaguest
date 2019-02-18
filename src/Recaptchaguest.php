@@ -13,7 +13,7 @@ use Craft;
 use craft\base\Plugin;
 use craft\elements\Entry;
 use craft\guestentries\controllers\SaveController;
-use \craft\guestentries\Plugin as GuestEntryPlugin;
+use craft\guestentries\events\SaveEvent;
 
 use mattwest\craftrecaptcha\CraftRecaptcha;
 use yii\base\Event;
@@ -58,9 +58,9 @@ class Recaptchaguest extends Plugin
 
     if (class_exists(GuestEntryPlugin::class) && $settings->validateContactForm)
     {
-      Event::on(GuestEntryPlugin::class, SaveController::EVENT_BEFORE_SAVE_ENTRY, function (Event $e) {
+      Event::on(SaveController::class, SaveController::EVENT_BEFORE_SAVE_ENTRY, function (SaveEvent $e) {
         /** @var Entry $submission */
-        $submission = $e->sender;
+        $submission = $e->entry;
 
         $captcha = Craft::$app->getRequest()->getParam('g-recaptcha-response');
 
