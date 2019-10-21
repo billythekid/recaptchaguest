@@ -36,5 +36,5 @@ See the [Guest Entries](https://github.com/craftcms/guest-entries) notes on sett
 
 [Output the recaptcha on your form](https://github.com/matt-west/craft-recaptcha#using-craft-recaptcha).
 
-If you select to validate a guest entries form and this plugin is installed any guestentry form submissions will be validated against the recaptcha field.
+If you enable the ‘Validate contact forms’ setting and this plugin is installed any guestentry form submissions will be validated against the recaptcha field.
 (And will fail validation if the recaptcha code is not correct / is not supplied)
