@@ -57,25 +57,29 @@ class Recaptchaguest extends Plugin
 
     if (class_exists(CraftRecaptcha::class) && Craft::$app->getPlugins()->isPluginEnabled('recaptcha'))
     {
-
-      $settings = CraftRecaptcha::$plugin->getSettings();
-
-      if (class_exists(GuestEntryPlugin::class) && Craft::$app->getPlugins()->isPluginEnabled('guest-entries') && $settings->validateContactForm)
+      if (class_exists(GuestEntryPlugin::class) && Craft::$app->getPlugins()->isPluginEnabled('guest-entries'))
       {
+
         Event::on(SaveController::class, SaveController::EVENT_BEFORE_SAVE_ENTRY, function (SaveEvent $e) {
-          /** @var Entry $submission */
-          $submission = $e->entry;
 
-          $captcha = Craft::$app->getRequest()->getParam('g-recaptcha-response');
-
-          $validates = CraftRecaptcha::$plugin->craftRecaptchaService->verify($captcha);
-
-          if (!$validates)
+          if (CraftRecaptcha::$plugin->getSettings()->validateContactForm)
           {
-            $submission->addError('recaptcha', 'Please verify you are human.');
-            $e->isValid = false;
+            /** @var Entry $submission */
+            $submission = $e->entry;
+
+            $captcha = Craft::$app->getRequest()->getParam('g-recaptcha-response');
+
+            $validates = CraftRecaptcha::$plugin->craftRecaptchaService->verify($captcha);
+
+            if (!$validates)
+            {
+              $submission->addError('recaptcha', 'Please verify you are human.');
+              $e->isValid = false;
+            }
           }
+
         });
+
       }
     }
   }
